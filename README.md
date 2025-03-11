@@ -17,6 +17,9 @@
 ```bash
 git clone https://github.com/troy12x/deepscaler
 cd deepscaler
+
+venv --python 3.10
+source .venv/bin/activate
 pip install -e verl
 pip install packaging
 pip install ninja
@@ -39,19 +42,16 @@ For L1-Max:
 python scripts/data/deepscaler_dataset.py --use_both_both
 ```
 
-For Evaluation on AIME2025, GPQA, LSAT and MMLU, you can use scripts in `scripts/eval`:
-```
-python scripts/eval/generate_aime.py
-python scripts/eval/generate_gpqa.py
-python scripts/eval/generate_lsat.py
-python scripts/eval/generate_mmlu.py
-```
 
 ### Train Models
 
 You can skip this step if you want to use our pre-trained models.
 
 You can run scripts in `scripts/train` to train your own models. Make sure to specify the correct data path.
+
+```
+./scripts/train/run_l1_max.sh
+```
 
 ### Evaluate Models
 
