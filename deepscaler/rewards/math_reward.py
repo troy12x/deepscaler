@@ -211,7 +211,7 @@ def majority_at_k(generations: List[str], ground_truths: Union[str, List[str]], 
     for gen in generations:
         # Remove thinking tokens if needed
         if ignore_think_token:
-            gen = re.sub(r'<think>.*?</think>', '', gen, flags=re.DOTALL)
+            gen = re.sub(r'<\|begin_of_thought\|>.*?<\|end_of_thought\|>', '', gen, flags=re.DOTALL)
         
         # Extract answer if it's in a \boxed format
         if "\\boxed" in gen:

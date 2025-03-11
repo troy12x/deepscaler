@@ -12,8 +12,8 @@ from typing import Dict, List, Optional, Any
 import pandas as pd
 from verl.utils.hdfs_io import copy, makedirs
 from verl.utils.reward_score.math import last_boxed_only_string, remove_boxed
-import sys
-sys.path.append('/data/group_data/l3lab/pranjala/deepscaler')
+#import sys
+#sys.path.append('/data/group_data/l3lab/pranjala/deepscaler')
 from deepscaler.data.utils import load_dataset
 from deepscaler.data.dataset_types import TrainDataset, TestDataset
 
