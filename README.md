@@ -53,6 +53,10 @@ You can skip this step if you want to use our pre-trained models.
 
 You can run scripts in `scripts/train` to train your own models. Make sure to specify the correct data path.
 
+```
+./scripts/train/run_l1_max.sh
+```
+
 ### Evaluate Models
 
 Use one of `scripts/eval` to evaluate your models. Make sure to specify the correct model path.
