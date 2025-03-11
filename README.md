@@ -17,8 +17,11 @@
 ```bash
 git clone https://github.com/troy12x/deepscaler
 cd deepscaler
-pip install -e .
 pip install -e verl
+pip install packaging
+pip install ninja
+pip install flash-attn --no-build-isolation
+pip install -e .
 ```
 
 
