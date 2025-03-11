@@ -71,20 +71,7 @@ def make_map_fn(split: str):
                 random_number = random.randint(100, 4000)
         # print(random_number)
         instruction = "Let's think step by step and output the final answer within \\boxed{}."
-        if NUM_TOKENS != -1:
-            if NUM_TOKENS < 0:
-                instruction = f"{instruction} Think for maximum {abs(NUM_TOKENS)} tokens."
-            else:
-                instruction = f"{instruction} Think for {NUM_TOKENS} tokens."
-        else:
-            if random_number != -1:
-                if random_number < 0:
-                    instruction = f"{instruction} Think for maximum {abs(random_number)} tokens."
-                else:
-                    instruction = f"{instruction} Think for {random_number} tokens."
-            else:
-                instruction = f"{instruction}"
-        # instruction = f"{instruction} Answer the following question using {random_number} words or less (including words inside <think> and </think>). You will get a 0 score if you exceed {random_number} words."
+      
         print(instruction[-50:])
         
         question = f"{question} {instruction}"

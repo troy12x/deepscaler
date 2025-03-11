@@ -23,9 +23,9 @@ for num_tokens in [-1200]:
     for i in range(len(ds)):
         question = ds[i]['question'].strip()
         if num_tokens >=-1:
-            question = f"{question}"+"\n\nLet's think step by step and output the final answer within \\boxed{}." + (f" Think for {num_tokens} tokens." if num_tokens != -1 else "")
+            question = f"{question}"+"\n\nLet's think step by step and output the final answer within \\boxed{}." 
         else:
-            question = f"{question}"+"\n\nLet's think step by step and output the final answer within \\boxed{}." + (f" Think for maximum {abs(num_tokens)} tokens.")
+            question = f"{question}"+"\n\nLet's think step by step and output the final answer within \\boxed{}." 
 
 
         all_data.append({
