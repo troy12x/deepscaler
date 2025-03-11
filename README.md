@@ -18,9 +18,10 @@
 git clone https://github.com/troy12x/deepscaler
 cd deepscaler
 
-venv --python 3.10
-source .venv/bin/activate
+python3.10 -m venv vllm_env
+source vllm_env/bin/activate
 pip install -e verl
+pip install wheel
 pip install packaging
 pip install ninja
 pip install flash-attn --no-build-isolation
