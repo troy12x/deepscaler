@@ -15,8 +15,8 @@
 ### Installation
 
 ```bash
-git clone https://github.com/cmu-l3/l1.git
-cd l1
+git clone https://github.com/troy12x/deepscaler
+cd deepscaler
 pip install -e .
 pip install -e verl
 ```
