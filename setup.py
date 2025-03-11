@@ -8,7 +8,6 @@ setup(
     packages=find_packages(include=['deepscaler',]),
     install_requires=[
         'google-cloud-aiplatform',
-        'latex2sympy2',
         'pylatexenc',
         'sentence_transformers',
         'tabulate',
