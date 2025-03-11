@@ -17,6 +17,9 @@
 ```bash
 git clone https://github.com/troy12x/deepscaler
 cd deepscaler
+
+venv --python 3.10
+source .venv/bin/activate
 pip install -e verl
 pip install packaging
 pip install ninja
