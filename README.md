@@ -26,7 +26,7 @@ pip install ninja
 pip install flash-attn --no-build-isolation
 pip install -e .
 ```
-##Swap
+## Swap
 
 ```
 sudo dd if=/dev/zero of=/swapfile bs=1G count=400 status=progress
