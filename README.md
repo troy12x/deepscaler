@@ -26,7 +26,18 @@ pip install ninja
 pip install flash-attn --no-build-isolation
 pip install -e .
 ```
+##Swap
 
+```
+sudo dd if=/dev/zero of=/swapfile bs=1G count=400 status=progress
+sudo fallocate -l 400G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+free -h
+
+```
 
 ### Prepare Dataset
 
