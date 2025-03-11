@@ -21,7 +21,7 @@ done
 
 # Set default model path if not provided
 if [ -z "$MODEL_PATH" ]; then
-    MODEL_PATH="checkpoints/deepscaler/l1_exact/actor/global_step_700"
+    MODEL_PATH="silx-ai/Quasar-3.7-Coding"
 fi
 
 # Train over a single node, 8 A100-80GB GPUs.
