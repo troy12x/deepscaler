@@ -21,7 +21,7 @@ done
 
 # Set default model path if not provided
 if [ -z "$MODEL_PATH" ]; then
-    MODEL_PATH="silx-ai/Quasar-3.7-Coding"
+    MODEL_PATH="silx-ai/Quasar-3.7"
 fi
 
 # Train over a single node, 8 A100-80GB GPUs.
