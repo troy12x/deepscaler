@@ -84,9 +84,9 @@ class MegatronPPOCritic(BasePPOCritic):
             if mpu.is_pipeline_last_stage(ignore_virtual=True):
                 # only on last rank. It should be on every tp rank
                 values = torch.cat([o['vpreds'] for o in output], dim=0)  # (bs, seq_size, vocal_size)
-                values = values.to(torch.float32)
+                values = values.to(torch.bfloat16)
             else:
-                values = torch.empty_like(attention_mask, dtype=torch.float32)
+                values = torch.empty_like(attention_mask, dtype=torch.bfloat16)
 
             # each tp ranks should contain the same value
             values = values * attention_mask

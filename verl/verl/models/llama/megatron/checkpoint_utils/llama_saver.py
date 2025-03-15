@@ -437,7 +437,7 @@ def merge_megatron_ckpt_llama(wrapped_models, config, is_value_model=False, dtyp
         elif dtype == "bf16":
             dtype = torch.bfloat16
         elif dtype is None or dtype == "fp32":
-            dtype = torch.float32
+            dtype = torch.bfloat16
         else:
             print(f'Unknown/unsupported dtype to save: {dtype}"')
             exit(1)

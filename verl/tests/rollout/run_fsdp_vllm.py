@@ -79,7 +79,7 @@ def main():
     from torch.distributed.device_mesh import init_device_mesh
     device_mesh = init_device_mesh('cuda', mesh_shape=(world_size,), mesh_dim_names=['fsdp'])
 
-    mixed_precision = MixedPrecision(param_dtype=torch.bfloat16, reduce_dtype=torch.float32, buffer_dtype=torch.float32)
+    mixed_precision = MixedPrecision(param_dtype=torch.bfloat16, reduce_dtype=torch.bfloat16, buffer_dtype=torch.bfloat16)
     fsdp_model = FSDP(actor_model,
                       use_orig_params=True,
                       auto_wrap_policy=None,

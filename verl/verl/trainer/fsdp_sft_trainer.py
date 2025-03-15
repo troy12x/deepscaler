@@ -159,7 +159,7 @@ class FSDPSFTTrainer(object):
         with init_context():
             self.model: PreTrainedModel = AutoModelForCausalLM.from_pretrained(local_model_path,
                                                                                config=config,
-                                                                               torch_dtype=torch.float32,
+                                                                               torch_dtype=torch.bfloat16,
                                                                                attn_implementation='flash_attention_2',
                                                                                trust_remote_code=trust_remote_code)
 
@@ -169,8 +169,8 @@ class FSDPSFTTrainer(object):
         log_gpu_memory_usage('After model allocation', logger=logger)
 
         mixed_precision = MixedPrecision(param_dtype=torch.bfloat16,
-                                         reduce_dtype=torch.float32,
-                                         buffer_dtype=torch.float32)
+                                         reduce_dtype=torch.bfloat16,
+                                         buffer_dtype=torch.bfloat16)
 
         auto_wrap_policy = get_fsdp_wrap_policy(self.model, config=self.config.model.fsdp_config.wrap_policy)
         if self.device_mesh.get_rank() == 0:

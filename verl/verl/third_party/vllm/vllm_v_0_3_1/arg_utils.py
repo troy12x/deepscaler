@@ -113,7 +113,7 @@ class EngineArgs:
         parser.add_argument('--dtype',
                             type=str,
                             default=EngineArgs.dtype,
-                            choices=['auto', 'half', 'float16', 'bfloat16', 'float', 'float32'],
+                            choices=['auto', 'half', 'float16', 'bfloat16', 'float', 'bfloat16'],
                             help='data type for model weights and activations. '
                             'The "auto" option will use FP16 precision '
                             'for FP32 and FP16 models, and BF16 precision '

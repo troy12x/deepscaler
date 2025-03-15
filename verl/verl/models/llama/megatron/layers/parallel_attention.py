@@ -266,7 +266,7 @@ class ParallelLlamaAttention(nn.Module):
             attn_weights = attn_weights + attention_mask
 
         # upcast attention to fp32
-        attn_weights = nn.functional.softmax(attn_weights, dim=-1, dtype=torch.float32).to(query_states.dtype)
+        attn_weights = nn.functional.softmax(attn_weights, dim=-1, dtype=torch.bfloat16).to(query_states.dtype)
         attn_output = torch.matmul(attn_weights, value_states)
 
         if attn_output.size() != (bsz, self.num_heads_per_tp, q_len, self.head_dim):
@@ -382,13 +382,13 @@ class ParallelLlamaAttentionRmPad(ParallelLlamaAttention):
         # when training.
         dropout_rate = 0.0  # if not self.training else self.attn_dropout
 
-        # In PEFT, usually we cast the layer norms in float32 for training stability reasons
-        # therefore the input hidden states gets silently casted in float32. Hence, we need
+        # In PEFT, usually we cast the layer norms in bfloat16 for training stability reasons
+        # therefore the input hidden states gets silently casted in bfloat16. Hence, we need
         # cast them back in float16 just to be sure everything works as expected.
         # This might slowdown training & inference so it is recommended to not cast the LayerNorms
         # in fp32. (LlamaRMSNorm handles it correctly)
         input_dtype = query_states.dtype
-        if input_dtype == torch.float32:
+        if input_dtype == torch.bfloat16:
             query_states = query_states.to(torch.float16)
             key_states = key_states.to(torch.float16)
             value_states = value_states.to(torch.float16)

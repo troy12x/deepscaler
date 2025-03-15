@@ -20,7 +20,7 @@ import torch
 from typing import Union
 
 HALF_LIST = [16, "16", "fp16", "float16"]
-FLOAT_LIST = [32, "32", "fp32", "float32"]
+FLOAT_LIST = [32, "32", "fp32", "bfloat16"]
 BFLOAT_LIST = ["bf16", "bfloat16"]
 
 
@@ -64,7 +64,7 @@ class PrecisionType(object):
         if precision in HALF_LIST:
             return torch.float16
         elif precision in FLOAT_LIST:
-            return torch.float32
+            return torch.bfloat16
         elif precision in BFLOAT_LIST:
             return torch.bfloat16
         else:
@@ -74,7 +74,7 @@ class PrecisionType(object):
     def to_str(precision):
         if precision == torch.float16:
             return 'fp16'
-        elif precision == torch.float32:
+        elif precision == torch.bfloat16:
             return 'fp32'
         elif precision == torch.bfloat16:
             return 'bf16'

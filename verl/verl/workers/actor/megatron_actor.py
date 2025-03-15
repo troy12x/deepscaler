@@ -170,10 +170,10 @@ class MegatronPPOActor(BasePPOActor):
                 if mpu.is_pipeline_last_stage(ignore_virtual=True):
                     # only on last rank. It should be on every tp rank
                     log_probs = torch.cat([o['log_probs'] for o in output], dim=0)  # (bs, seq_size)
-                    log_probs = log_probs.to(torch.float32)
+                    log_probs = log_probs.to(torch.bfloat16)
                 else:
                     log_probs = torch.empty(size=(batch_size, response_length),
-                                            dtype=torch.float32,
+                                            dtype=torch.bfloat16,
                                             device=input_ids.device)
 
                 # broadcast across pp ranks
@@ -201,9 +201,9 @@ class MegatronPPOActor(BasePPOActor):
 
                 ``responses``: tensor of shape [batch_size, response_length]. torch.int64. Note that responses = input_ids[:, -response_length:]
 
-                ``old_log_probs``: tensor of shape [batch_size, response_length]. torch.float32. The log probability of responses.
+                ``old_log_probs``: tensor of shape [batch_size, response_length]. torch.bfloat16. The log probability of responses.
 
-                ``advantages``: tensor of shape [batch_size, response_length]. torch.float32. The advantages of responses.
+                ``advantages``: tensor of shape [batch_size, response_length]. torch.bfloat16. The advantages of responses.
                 See PPO paper for details. https://arxiv.org/abs/1707.06347
 
         Returns:

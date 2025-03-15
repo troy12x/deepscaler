@@ -53,9 +53,9 @@ class LLM:
         tensor_parallel_size: The number of GPUs to use for distributed
             execution with tensor parallelism.
         dtype: The data type for the model weights and activations. Currently,
-            we support `float32`, `float16`, and `bfloat16`. If `auto`, we use
+            we support `bfloat16`, `float16`, and `bfloat16`. If `auto`, we use
             the `torch_dtype` attribute specified in the model config file.
-            However, if the `torch_dtype` in the config is `float32`, we will
+            However, if the `torch_dtype` in the config is `bfloat16`, we will
             use `float16` instead.
         quantization: The method used to quantize the model weights. Currently,
             we support "awq". If None, we assume the model weights are not

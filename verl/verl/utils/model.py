@@ -93,7 +93,7 @@ def create_huggingface_critic(model_name: str, override_config_kwargs=None, auto
                                                         automodel_kwargs=automodel_kwargs)
     if automodel_kwargs is None:
         automodel_kwargs = {}
-    torch_dtype = automodel_kwargs.get('torch_dtype', torch.float32)
+    torch_dtype = automodel_kwargs.get('torch_dtype', torch.bfloat16)
     critic_module.lm_head = nn.Sequential(nn.Linear(critic_module.config.hidden_size, 1, dtype=torch_dtype),
                                           LambdaLayer(fn=squeeze))
     return critic_module

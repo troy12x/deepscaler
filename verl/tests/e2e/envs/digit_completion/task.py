@@ -141,7 +141,7 @@ def compute_reward(prompt: str, response: str, sequence_reward=1.):
     per_token_reward = sequence_reward / (len(ground_truth_response) + 1)  # including [EOS]
 
     # pad
-    reward = np.zeros(response_length, dtype=np.float32)  # this assumes that each char is a token
+    reward = np.zeros(response_length, dtype=np.bfloat16)  # this assumes that each char is a token
     # assign reward until mismatches
     ground_truth_idx = 0
     for i in range(response_length):

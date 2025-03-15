@@ -106,7 +106,7 @@ def apply_kl_penalty(data: DataProto, kl_ctrl: core_algos.AdaptiveKLController, 
         beta = kl_ctrl.value
     else:
         beta = 0
-        kld = torch.zeros_like(response_mask, dtype=torch.float32)
+        kld = torch.zeros_like(response_mask, dtype=torch.bfloat16)
 
     token_level_rewards = token_level_scores - beta * kld
 

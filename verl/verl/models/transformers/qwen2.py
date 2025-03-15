@@ -77,11 +77,11 @@ def qwen2_flash_attn_forward(
     value_states = repeat_kv(value_states, self.num_key_value_groups)
     dropout_rate = 0.0 if not self.training else self.attention_dropout
 
-    # In PEFT, usually we cast the layer norms in float32 for training stability reasons
-    # therefore the input hidden states gets silently casted in float32. Hence, we need
+    # In PEFT, usually we cast the layer norms in bfloat16 for training stability reasons
+    # therefore the input hidden states gets silently casted in bfloat16. Hence, we need
     # cast them back in float16 just to be sure everything works as expected.
     input_dtype = query_states.dtype
-    if input_dtype == torch.float32:
+    if input_dtype == torch.bfloat16:
         if torch.is_autocast_enabled():
             target_dtype = torch.get_autocast_gpu_dtype()
         # Handle the case where the model is quantized
@@ -91,8 +91,8 @@ def qwen2_flash_attn_forward(
             target_dtype = self.q_proj.weight.dtype
 
         logger.warning_once(
-            f"The input hidden states seems to be silently casted in float32, this might be related to"
-            f" the fact you have upcasted embedding or layer norm layers in float32. We will cast back the input in"
+            f"The input hidden states seems to be silently casted in bfloat16, this might be related to"
+            f" the fact you have upcasted embedding or layer norm layers in bfloat16. We will cast back the input in"
             f" {target_dtype}.")
 
         query_states = query_states.to(target_dtype)

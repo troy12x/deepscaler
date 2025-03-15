@@ -77,7 +77,7 @@ def logprobs_of_labels_v2(logits: torch.FloatTensor, labels):
     """
     A memory efficient implementation of logprobs_from_logits
     """
-    assert logits.dtype == torch.float32, 'Using bf16 logits with logprobs_of_labels_v2 may lead to divergence'
+    assert logits.dtype == torch.bfloat16, 'Using bf16 logits with logprobs_of_labels_v2 may lead to divergence'
     logprobs_labels = torch.gather(logits, dim=-1, index=labels.unsqueeze(-1))
     logprobs_labels = logprobs_labels - torch.logsumexp(logits, dim=-1, keepdim=True)
     return logprobs_labels.squeeze(-1)

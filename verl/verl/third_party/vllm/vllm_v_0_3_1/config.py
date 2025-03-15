@@ -464,29 +464,29 @@ class LoRAConfig:
 _STR_DTYPE_TO_TORCH_DTYPE = {
     "half": torch.float16,
     "float16": torch.float16,
-    "float": torch.float32,
-    "float32": torch.float32,
+    "float": torch.bfloat16,
+    "bfloat16": torch.bfloat16,
     "bfloat16": torch.bfloat16,
 }
 
-_ROCM_NOT_SUPPORTED_DTYPE = ["float", "float32"]
+_ROCM_NOT_SUPPORTED_DTYPE = ["float", "bfloat16"]
 
 
 def _get_and_verify_dtype(
     config: PretrainedConfig,
     dtype: Union[str, torch.dtype],
 ) -> torch.dtype:
-    # NOTE: getattr(config, "torch_dtype", torch.float32) is not correct
+    # NOTE: getattr(config, "torch_dtype", torch.bfloat16) is not correct
     # because config.torch_dtype can be None.
     config_dtype = getattr(config, "torch_dtype", None)
     if config_dtype is None:
-        config_dtype = torch.float32
+        config_dtype = torch.bfloat16
 
     if isinstance(dtype, str):
         dtype = dtype.lower()
         if dtype == "auto":
-            if config_dtype == torch.float32:
-                # Following the common practice, we use float16 for float32
+            if config_dtype == torch.bfloat16:
+                # Following the common practice, we use float16 for bfloat16
                 # models.
                 torch_dtype = torch.float16
             else:
@@ -500,7 +500,7 @@ def _get_and_verify_dtype(
     else:
         raise ValueError(f"Unknown dtype: {dtype}")
 
-    if is_hip() and torch_dtype == torch.float32:
+    if is_hip() and torch_dtype == torch.bfloat16:
         rocm_supported_dtypes = [
             k for k, v in _STR_DTYPE_TO_TORCH_DTYPE.items() if (k not in _ROCM_NOT_SUPPORTED_DTYPE)
         ]
@@ -509,11 +509,11 @@ def _get_and_verify_dtype(
 
     # Verify the dtype.
     if torch_dtype != config_dtype:
-        if torch_dtype == torch.float32:
-            # Upcasting to float32 is allowed.
+        if torch_dtype == torch.bfloat16:
+            # Upcasting to bfloat16 is allowed.
             pass
-        elif config_dtype == torch.float32:
-            # Downcasting from float32 to float16 or bfloat16 is allowed.
+        elif config_dtype == torch.bfloat16:
+            # Downcasting from bfloat16 to float16 or bfloat16 is allowed.
             pass
         else:
             # Casting between float16 and bfloat16 is allowed with a warning.

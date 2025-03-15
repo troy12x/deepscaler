@@ -251,7 +251,7 @@ def forward(
     if do_min_p:
         logits = _apply_min_p(logits, sampling_tensors.min_ps)
 
-    # We use float32 for probabilities and log probabilities.
+    # We use bfloat16 for probabilities and log probabilities.
     # Compute the probabilities.
     probs = torch.softmax(logits, dim=-1, dtype=torch.float)
     # Compute the log probabilities.
