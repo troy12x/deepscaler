@@ -109,7 +109,7 @@ class LLM(LLM):
         tokenizer_revision: Optional[str] = None,
         seed: int = 0,
         gpu_memory_utilization: float = 0.9,
-        swap_space: int = 40,
+        swap_space: int = 8,
         cpu_offload_gb: float = 0,
         enforce_eager: bool = False,
         max_context_len_to_capture: Optional[int] = None,
