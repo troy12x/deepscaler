@@ -48,7 +48,6 @@ from vllm.transformers_utils.detokenizer import Detokenizer
 from vllm.transformers_utils.tokenizer import AnyTokenizer
 from vllm.usage.usage_lib import UsageContext, is_usage_stats_enabled, usage_message
 from vllm.utils import Counter, weak_bind
-from vllm.version import __version__ as VLLM_VERSION
 
 from .arg_utils import EngineArgs
 from .config import LoadConfig, ModelConfig
@@ -134,7 +133,6 @@ class LLMEngine(LLMEngine):
             "multi_step_stream_outputs=%s, enable_prefix_caching=%s, "
             "use_async_output_proc=%s, use_cached_outputs=%s, "
             "mm_processor_kwargs=%s)",
-            VLLM_VERSION,
             model_config.model,
             speculative_config,
             model_config.tokenizer,
