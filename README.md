@@ -26,6 +26,8 @@ pip install packaging
 pip install ninja
 pip install flash-attn --no-build-isolation
 pip install -e .
+pip install "transformers<4.48"
+pip install vllm==0.5.4 
 ```
 ## Swap
 
